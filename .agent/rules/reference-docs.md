@@ -1,0 +1,40 @@
+# 公式ドキュメント参照ルール (Reference Docs)
+
+コードの説明や解説をするときは、常に公式ドキュメントを根拠にすること。
+
+## 基本方針
+- コードの構文・メソッド・パターンを説明するとき、公式ドキュメントのURLを添えること
+- すべての行にURLが必要なわけではない。重要な構文・メソッド・パターンに添える
+- フォーマット:
+  ```
+  📖 公式ドキュメント: [該当ページURL]
+  ```
+
+## 公式推奨の書き方
+- 公式が推奨している書き方やベストプラクティスがあれば紹介すること
+- 現在のコードが推奨と異なる場合は、推奨される書き方も見せて比較すること
+- フォーマット:
+  ```
+  📖 公式の推奨:
+  公式ドキュメントでは〇〇の書き方が推奨されています。
+  URL: [公式ドキュメントのURL]
+  理由: △△のため
+  ```
+
+## URLの信頼性
+- WebSearch ツールを使って公式ドキュメントの正確なURLを取得すること
+- **推測でURLを作らないこと**。存在を確認できないURLは載せない
+- 日本語版があれば日本語版のURLを優先する
+
+## 主要技術の公式ドキュメント
+- HTML/CSS/JavaScript: developer.mozilla.org (MDN)
+- React: react.dev
+- Next.js: nextjs.org/docs
+- Ruby: docs.ruby-lang.org
+- Ruby on Rails: guides.rubyonrails.org / api.rubyonrails.org
+- Python: docs.python.org
+- Node.js: nodejs.org/docs
+- TypeScript: typescriptlang.org/docs
+
+## やりとりの最後に
+コードの説明を含むやりとりの最後には、参照した公式ドキュメントのURLをまとめてリストにすること。

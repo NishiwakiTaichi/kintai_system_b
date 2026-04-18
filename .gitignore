@@ -1,0 +1,52 @@
+# Ruby on Rails
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-shm
+/db/*.sqlite3-wal
+/public/system
+/coverage/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+
+# Bundler
+/.bundle
+/vendor/bundle
+
+# Node
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# Environment
+.env
+.env.*
+!.env.example
+/config/master.key
+/config/credentials/*.key
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+*:Zone.Identifier
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
