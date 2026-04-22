@@ -11,6 +11,22 @@
   </head>
 
   <body>
+    <div class="header">
+      <%= link_to "勤怠システム", root_path %>
+
+      <% if user_signed_in? %>                                                                                                          
+        <%= link_to "トップへ", root_path %>
+        <% if admin_user? %>                                                                                                            
+          <%= link_to "ユーザー一覧", "#" %>
+          <%= link_to "基本情報の修正", "#" %>                                                                                          
+        <% end %>                             
+        <%= link_to "アカウント", edit_user_registration_path %>                                                                        
+      <% else %>                                                
+        <%= link_to "トップへ", root_path %>                                                                                            
+        <%= link_to "ログイン", new_user_session_path %>
+      <% end %>
+    </div>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
