@@ -1,0 +1,23 @@
+<style>
+  input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
+</style>
+
+<div class="container mt-4" style="max-width: 500px;">
+  <h2 class="text-center mb-4" style="color: #555;">基本情報の更新</h2>
+
+  <%= form_with model: @user, url: update_basic_info_user_path(@user), method: :patch, local: true do |f| %>
+
+    <div class="mb-3">
+      <%= f.label :work_time, "指定勤務時間", class: "form-label" %>
+      <%= f.time_field :work_time, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :basic_time, "基本勤務時間", class: "form-label" %>
+      <%= f.time_field :basic_time, class: "form-control" %>
+    </div>
+
+    <%= f.submit "編集", class: "btn btn-primary w-100" %>
+
+  <% end %>
+</div>

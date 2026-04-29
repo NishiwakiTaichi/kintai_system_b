@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_19_165216) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_26_002631) do
   create_table "attendances", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "worked_on"
     t.datetime "started_at"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_19_165216) do
     t.boolean "admin", default: false
     t.datetime "basic_time"
     t.datetime "work_time"
+    t.string "employee_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
