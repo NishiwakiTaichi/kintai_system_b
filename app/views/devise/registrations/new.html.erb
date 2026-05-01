@@ -23,9 +23,6 @@
 
         <div class="mb-3">
           <%= f.label :password, "パスワード", class: "form-label" %>
-          <% if @minimum_password_length %>
-            <small class="text-muted">（<%= @minimum_password_length %>文字以上）</small>
-          <% end %>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
 
@@ -39,8 +36,6 @@
         </div>
       <% end %>
 
-      <hr>
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

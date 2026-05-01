@@ -11,3 +11,6 @@ bundle exec rails assets:clean
 
 # データベースのマイグレーションを実行
 bundle exec rails db:migrate
+
+# 初期データを投入（find_or_initialize_byを使っているので重複しない）
+bundle exec rails db:seed
