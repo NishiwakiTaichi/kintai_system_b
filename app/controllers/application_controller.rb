@@ -8,11 +8,6 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
   end
 
-  # 自分自身のページにのみアクセスを許可する
-  def correct_user
-    redirect_to root_url unless current_user == @user
-  end
-
   # 管理者のみアクセスを許可する
   def admin_user
     redirect_to root_url unless current_user.admin?
@@ -29,8 +24,11 @@ class ApplicationController < ActionController::Base
 
   # 表示対象月の1ヶ月分の勤怠データを準備する
   def set_one_month
-    @first_day = params[:date].nil? ?
-      Date.current.beginning_of_month : params[:date].to_date
+    @first_day = if params[:date].nil?
+                   Date.current.beginning_of_month
+                 else
+                   params[:date].to_date
+                 end
     @last_day = @first_day.end_of_month
     one_month = [*@first_day..@last_day]
 

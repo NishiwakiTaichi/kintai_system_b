@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+
+/* 基本情報フォームのコンテナ */
+.form-container {
+  max-width: 500px;
+}
+
+/* フォームのタイトル色 */
+.page-title {
+  color: #555;
+}
+
+/* グレーボタン */
+.btn-gray {
+  background-color: #d6d8db;
+}
+
+/* 検索カードの最小幅 */
+.search-card {
+  min-width: 260px;
+}
+
+/* 時刻フィールドのカレンダーアイコンを非表示 */
+.time-field::-webkit-calendar-picker-indicator {
+  display: none;
+}
