@@ -2,9 +2,11 @@
   <table class="table table-bordered">
     <tr>
       <td>
-        <%= link_to "←", user_path(@user, date: @first_day.prev_month), class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to "←", user_path(@user, date: @first_day.prev_month),
+                    class: "btn btn-sm btn-outline-secondary" %>
         <%= l(@first_day, format: :middle) %> 時間管理表
-        <%= link_to "→", user_path(@user, date: @first_day.next_month), class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to "→", user_path(@user, date: @first_day.next_month),
+                    class: "btn btn-sm btn-outline-secondary" %>
       </td>
       <td>指定勤務時間：<%= format_basic_info(@user.work_time) %></td>
       <td><%= format_basic_info(@user.basic_time) %> 基本時間</td>
@@ -49,12 +51,15 @@
         <% floored_finished = floor_to_15min(day.finished_at) %>
         <tr>
           <td><%= l(day.worked_on, format: :short) %></td>
-          <td class="<%= day_color_class(day.worked_on) %>"><%= %w[日 月 火 水 木 金 土][day.worked_on.wday] %></td>
+          <td class="<%= day_color_class(day.worked_on) %>">
+            <%= %w[日 月 火 水 木 金 土][day.worked_on.wday] %>
+          </td>
 
           <%# 出社列（時・分） %>
           <% if day.worked_on == Date.current && day.started_at.nil? %>
             <td colspan="2">
-              <%= button_to "出社", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-sm" %>
+              <%= button_to "出社", user_attendance_path(@user, day),
+                            method: :patch, class: "btn btn-primary btn-sm" %>
             </td>
           <% else %>
             <td><%= floored_started&.hour %></td>
@@ -64,7 +69,8 @@
           <%# 退社列（時・分） %>
           <% if day.worked_on == Date.current && day.started_at.present? && day.finished_at.nil? %>
             <td colspan="2">
-              <%= button_to "退社", user_attendance_path(@user, day), method: :patch, class: "btn btn-warning btn-sm" %>
+              <%= button_to "退社", user_attendance_path(@user, day),
+                            method: :patch, class: "btn btn-warning btn-sm" %>
             </td>
           <% else %>
             <td><%= floored_finished&.hour %></td>
@@ -95,8 +101,11 @@
           <% end %>
         </td>
         <td colspan="2">
-          <% total = @attendances.select { |d| d.started_at.present? && d.finished_at.present? }
-                                 .sum { |d| working_times(floor_to_15min(d.started_at), floor_to_15min(d.finished_at)).to_f } %>
+          <% total = @attendances
+                      .select { |d| d.started_at.present? && d.finished_at.present? }
+                      .sum { |d|
+                        working_times(floor_to_15min(d.started_at), floor_to_15min(d.finished_at)).to_f
+                      } %>
           <%= format("%.2f", total) %>
         </td>
       </tr>

@@ -32,8 +32,10 @@
 
             <% future = day.worked_on > Date.current %>
             <%= fields_for "attendances[#{day.id}]" do |af| %>
-              <td><%= af.time_field :started_at, value: day.started_at&.strftime('%H:%M'), class: "form-control form-control-sm", disabled: future %></td>
-              <td><%= af.time_field :finished_at, value: day.finished_at&.strftime('%H:%M'), class: "form-control form-control-sm", disabled: future %></td>
+              <td><%= af.time_field :started_at, value: day.started_at&.strftime('%H:%M'),
+                                   class: "form-control form-control-sm", disabled: future %></td>
+              <td><%= af.time_field :finished_at, value: day.finished_at&.strftime('%H:%M'),
+                                   class: "form-control form-control-sm", disabled: future %></td>
               <td>
                 <% if day.started_at.present? && day.finished_at.present? %>
                   <%= working_times(day.started_at, day.finished_at) %>

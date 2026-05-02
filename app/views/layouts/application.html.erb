@@ -22,7 +22,8 @@
             <%= link_to "トップへ", root_path, class: "nav-link text-white" %>
             <% if admin_user? %>
               <%= link_to "ユーザー一覧", users_path, class: "nav-link text-white" %>
-              <%= link_to "基本情報の修正", edit_basic_info_user_path(current_user), class: "nav-link text-white" %>
+              <%= link_to "基本情報の修正", edit_basic_info_user_path(current_user),
+                          class: "nav-link text-white" %>
             <% end %>
             <div class="dropdown">
               <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">
@@ -32,7 +33,8 @@
                 <li><%= link_to "勤怠", user_path(current_user), class: "dropdown-item" %></li>
                 <li><%= link_to "設定", edit_user_registration_path, class: "dropdown-item" %></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
+                <li><%= link_to "ログアウト", destroy_user_session_path,
+                               data: { turbo_method: :delete }, class: "dropdown-item" %></li>
               </ul>
             </div>
           <% else %>
@@ -43,9 +45,11 @@
       </div>
     </nav>
 
-    <% flash_type_map = { "notice" => "success", "alert" => "danger", "error" => "danger", "warning" => "warning" } %>
+    <% flash_type_map = { "notice" => "success", "alert" => "danger",
+                         "error" => "danger", "warning" => "warning" } %>
     <% flash.each do |type, message| %>
-      <div class="alert alert-<%= flash_type_map[type.to_s] || type %> alert-dismissible fade show m-2" role="alert">
+      <div class="alert alert-<%= flash_type_map[type.to_s] || type %>
+                  alert-dismissible fade show m-2" role="alert">
         <%= message %>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
