@@ -33,3 +33,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# 学習キット用ファイル（講師提出には不要）
+/.agent
+/.claude
+/.cursor
+/CLAUDE.md
+/GEMINI.md
+/SETUP.md
