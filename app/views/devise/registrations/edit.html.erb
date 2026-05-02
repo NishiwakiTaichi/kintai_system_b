@@ -27,7 +27,6 @@
 
         <div class="mb-3">
           <%= f.label :password, "パスワード", class: "form-label" %>
-          <small class="text-muted">（変更しない場合は空欄）</small>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
 
@@ -41,8 +40,7 @@
         </div>
       <% end %>
 
-      <hr>
-      <%= link_to "アカウントを削除する", registration_path(resource_name), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "text-danger" %>
+
     </div>
   </div>
 </div>
