@@ -25,14 +25,18 @@ class UsersController < ApplicationController
   def update
     failed_records = {}
 
-    params[:attendances]&.each do |id, attrs|
-      attendance = @user.attendances.find(id)
-      attendance.assign_attributes(attendance_params(attrs))
-      failed_records[attendance.id] = attendance unless attendance.save(context: :edit_attendance)
+    ActiveRecord::Base.transaction do
+      params[:attendances]&.each do |id, attrs|
+        attendance = @user.attendances.find(id)
+        processed = parse_overnight_time(attendance_params(attrs), attendance.worked_on)
+        attendance.assign_attributes(processed)
+        failed_records[attendance.id] = attendance unless attendance.save(context: :edit_attendance)
+      end
+      raise ActiveRecord::Rollback if failed_records.any?
     end
 
     if failed_records.empty?
-      redirect_to @user, notice: "勤怠情報を更新しました。"
+      redirect_to user_path(@user, date: @first_day), notice: "勤怠情報を更新しました。"
     else
       @attendances = @attendances.map { |a| failed_records[a.id] || a }
       render :edit, status: :unprocessable_entity
@@ -58,7 +62,31 @@ class UsersController < ApplicationController
   private
 
   def attendance_params(attrs)
-    attrs.permit(:started_at, :finished_at, :note)
+    attrs.permit(:started_at_hour, :started_at_minute, :finished_at_hour, :finished_at_minute, :note)
+  end
+
+  def parse_overnight_time(attrs, worked_on)
+    result = { note: attrs[:note] }
+
+    if attrs[:started_at_hour].present? && attrs[:started_at_minute].present?
+      result[:started_at] = worked_on.beginning_of_day +
+                            attrs[:started_at_hour].to_i.hours +
+                            attrs[:started_at_minute].to_i.minutes
+    else
+      result[:started_at] = nil
+    end
+
+    if attrs[:finished_at_hour].present? && attrs[:finished_at_minute].present?
+      hours = attrs[:finished_at_hour].to_i
+      minutes = attrs[:finished_at_minute].to_i
+      base_date = hours >= 24 ? worked_on.tomorrow : worked_on
+      adjusted_hours = hours >= 24 ? hours - 24 : hours
+      result[:finished_at] = base_date.beginning_of_day + adjusted_hours.hours + minutes.minutes
+    else
+      result[:finished_at] = nil
+    end
+
+    result
   end
 
   def basic_info_params

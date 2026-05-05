@@ -23,7 +23,7 @@
 </div>
 
 <div class="mb-3">
-  <%= link_to "勤怠を編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm" %>
+  <%= link_to "勤怠を編集", edit_user_path(@user, date: @first_day), class: "btn btn-outline-secondary btn-sm" %>
 </div>
 
 <div>
@@ -67,13 +67,15 @@
           <% end %>
 
           <%# 退社列（時・分） %>
-          <% if day.worked_on == Date.current && day.started_at.present? && day.finished_at.nil? %>
+          <% if day.started_at.present? && day.finished_at.nil? %>
             <td colspan="2">
               <%= button_to "退社", user_attendance_path(@user, day),
                             method: :patch, class: "btn btn-warning btn-sm" %>
             </td>
           <% else %>
-            <td><%= floored_finished&.hour %></td>
+            <% finished_hour = floored_finished.present? && floored_finished.to_date > day.worked_on ?
+                               floored_finished.hour + 24 : floored_finished&.hour %>
+            <td><%= finished_hour %></td>
             <td><%= floored_finished&.strftime('%M') %></td>
           <% end %>
 
